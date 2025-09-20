@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Virtual</title>
+    <link rel="stylesheet" href="Style.css/style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <section>
+            <h1>Agende sua Consulta</h1>
+             <form>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Insira seu nome completo" required>
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" placeholder="Insira seu CPF" required>
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimento" required>
+                <label for="celular">Celular:</label>
+                <input type="tel" id="celular" placeholder="Insira o número de celular" required>
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" placeholder="Insira o seu endereço" required>
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" placeholder="Insira o nome do seu bairro" required>
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" placeholder="Insira o nome da sua cidade" required>
+                <label for="convenio">Possui Convênio?</label>
+                <select>
+                    <option value="">Selecione o Convênio</option>
+                    <option value="">Unimed</option>
+                    <option value="">SulAmérica</option>
+                    <option value="">Hapvida</option>
+                    <option value="">Não possuo convênio</option>
+                </select>
+                <label>Escolha a especialidade do médico:</label>
+                <select>
+                    <option value="">Selecione a Especialidade</option>
+                    <option value="clinicoGeral">Clínico Geral</option>
+                    <option value="dermatologista">Dermatologista</option>
+                    <option value="ginecologista">Ginecologista</option>
+                    <option value="oftamologista">Oftamologista</option>
+                </select>
+                <label for="dataConsulta">Escolha a data da consulta</label>
+                <input type="date" id="dataConsulta" required>
+                <label for="horarioConsulta">Escolha o horário</label>
+                <input type="time" id="horarioConsulta" required>
+                <button type="submit">Agendar</button>                     
+            </form>
+        </section>
+        
+        <div id="resumo">
+
+            <h2>Confirme seu Agendamento</h2>
+            <p id="textoResumo"></p>
+
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <footer></footer>
+    
+</body>
+</html>
