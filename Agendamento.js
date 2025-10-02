@@ -22,7 +22,7 @@ function gerarHorariosParaData(dataSelecionada){
     option.value = horaFormatada;
     option.innerHTML = horaFormatada;
     
-    //Verifica se esse horário está agendado para a data selecionada
+    //Verifica se esse horário já está agendado para a data selecionada
     const dataHora = new Date(`${dataSelecionada}T${horaFormatada}:00`);
     const ocupado = consultasAgendadas.some(
         consulta => consulta.toISOString() === dataHora.toISOString());
@@ -43,4 +43,70 @@ inputData.addEventListener("change", () =>{
         gerarHorariosParaData(dataSelecionada);
     }
 })
+
+//Adiciona um evento para pegar os valores de data e horario quando o botão for clicado
+document.getElementById("enviar").addEventListener("click", () => {
+    const dataSelecionada = inputData.value;
+    const horarioSelecionado = horario.value;
+
+    //Junta o horário e a data 
+    if(dataSelecionada && horarioSelecionado){
+        const dataHoraCompleta = `${dataSelecionada}T${horarioSelecionado}:00`;
+        const novaConsulta = new Date (dataHoraCompleta);
+
+        //Verifica se já tem algo agendado
+        const consultaExiste = consultasAgendadas.some(
+        consulta => consulta.toISOString() === horarioSelecionado.toISOString());
+
+        //Se tiver avisa que precisa escolher outro horario
+        if (consultaExiste){
+            alert("Já existe uma consulta neste horário!!");
+            //Senão adiciona no array e atualiza a lista
+        } else {
+            consultasAgendadas.push(novaConsulta);
+            alert(`A consulta foi agendada para: ${novaConsulta.toLocaleString()}`);
+            console.log("Consulta agendada");
+            gerarHorariosParaData(dataSelecionada);
+        }
+    }
+})
+
+//Pega os dados do formulário
+function exibirDados(){
+
+    const nome = document.getElementById("nome").value;
+    const cpf = document.getElementById("cpf").value;
+    const dataNascimento = document.getElementById("dataNascimento").value.toLocaleString("pt-BR");
+    const celular = document.getElementById("celular").value;
+    const convenio = document.getElementById("convenio").value;
+    const medico = document.getElementById("medico").value;
+    const diaConsulta = document.getElementById("dataConsulta").value.toLocaleString("pt-BR");
+    const horaConsulta = document.getElementById("horarioConsulta").value;
+
+    //Organiza em como vai exibir
+    const validacao = {
+        Nome: nome,
+        CPF: cpf,
+        DataNascimento: dataNascimento,
+        Celular: celular,
+        Convênio: convenio,
+        Médico: medico,
+        Consulta: diaConsulta,
+        Horário: horaConsulta
+    };
+
+    //Limpa os dados anteriores se houver
+    const resumo = document.getElementById("resumo");
+    resumo.innerHTML="";
+
+    //Cria uma lista com os dados
+    const validaDados = document.createElement("ul");
+    for(const label in validacao) {
+        const listaDados = document.createElement("li");
+        listaDados.textContent = `${label}: ${validacao[label]}`;
+        validaDados.appendChild(listaDados);
+    }
+    //Traz o resumo
+    resumo.appendChild(validaDados);
+}
 
